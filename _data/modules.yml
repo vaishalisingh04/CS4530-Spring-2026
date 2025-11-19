@@ -8,13 +8,13 @@
   name: Typescript & Test Driven Development
   page: 
 2a:
-  name: Test Adequacy
+  name: Test Adequacy & More?
   page: 
 2b:
   name: Code-Level Design Principles
   page: 
 3a:
-  name: Interaction-Level Design Patterns
+  name: Interaction-Level Design Patterns / Simple WebApp?
   page: 
 3b:
   name: Concurrency Patterns
@@ -87,6 +87,10 @@ ip1:
   page: 
 ip2:
   name: Individual Project 2 
+  type: deadline
+  page: 
+ip3:
+  name: Individual Project 3 
   type: deadline
   page: 
 tp1:
