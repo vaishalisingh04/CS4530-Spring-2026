@@ -28,7 +28,7 @@ deadlines:
       date: 2025/12/08 12:00pm
       content: tp5
 dates:
-  firstMonday: 2025/09/03
+  firstMonday: 2026/01/05
   numWeeks: 15
 types:
   default:
