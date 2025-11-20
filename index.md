@@ -64,7 +64,7 @@ The project will provide hands-on experience to complement the skills taught in 
   - React
   - Visual Studio Code (or similar IDE)
   - Git
-  - Jest
+  - Vitest
   - Postman
 
 Select projects from Spring 2025 are hosted [in our project showcase](https://neu-se.github.io/CS4530-Spring-2025/assignments/project-showcase).
