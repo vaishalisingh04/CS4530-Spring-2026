@@ -9,17 +9,22 @@ nav_order: 1
 ## Policy on use of AI
 Our policy on use of AI can be found below:
 
-### For IP1, IP2, and Activities:
-The use of Artificial Intelligence (AI) tools is **forbidden**, subject to the following:
 
-* The use of auto-complete tools that suggest the next line or few lines of your code, is **permitted**. The use of these tools saves you typing, without much impact on your learning experience. 
-* The use of tools that take natural-language input and generate code is **forbidden**. This includes tools like Chat GPT, Cursor, AugmentCode, etc.  It also includes Chat modes in VSC and “/” commands in CoPilot.
+### For all written work:
+We ask for written reflections to understand your own thought process and practice communication, not because we want to read lots of LLM output. Please show respect and do not use LLM-based tools to generate your written assignments.
+
+### For IP1, IP2, and Activities:
+The use of Artificial Intelligence (AI) tools is **forbidden**.
+
+* This includes the use of Copilot or other tools that suggest the next line or few lines of code. 
+* This includes use of tools that take natural-language input and generate code such as Chat GPT, Cursor, AugmentCode, Chat modes in VSC, and “/” commands in CoPilot
+* This includes chat based tools that allow you to ask questions about your code (“where is the controller for the /user/ API endpoint”).
 
 You **may** use LLM-based tools like ChatGPT or Claude as shortcuts in situations where you might use Google Search, Stack Overflow, etc, for learning purposes only. You may **never** copy-paste code produced by online resources.
 
 Remember: The basic policy is that you are **responsible for the code you submit. We reserve the right to interview you orally** to make sure that you understand everything in your submission. 
 
-### For the Team Project:
+### For IP3 and the Team Project:
 The following policy is a **draft**. We solicit feedback from students who have already used AI tools in their programming.
 
 The use of Artificial Intelligence (AI) tools is **permitted**, subject to the following:

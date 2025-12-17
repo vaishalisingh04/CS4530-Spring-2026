@@ -7,11 +7,13 @@ has_children: true
 ---
 
 ## Grading
-There will be individual projects (previously known as assignments) and a team project (in a group of 3-4 members). The overall grading breakdown is:
-* 30% Individual project (10% for deliverable 1, 20% for deliverable 2)
+There will be individual projects (previously known as assignments) and a team project (in a group of 4 members). The overall grading breakdown is:
+* 30% Individual project (three individual project deliverables)
 * 40% Team project (including peer evaluations / surveys)
-* 10% Participation in synchronous class, practice activities
+* 10% Participation in synchronous class, activities, and project-related work sessions
 * 20% Exam
+
+We generally follow the grading scale that looks like this: As for 90s, Bs for 80s, Cs for 70s, Ds for 60s and F for <60. Each instructor uses their own thresholds for '+' and '-' grades.
 
 **Assignment of team project grades:** In cases where team members do not equally contribute to the project, we may assign different grades to different individuals, up to an extreme of deducting 50% of the team project grade for a student (which might arise to 100% deduction for not contributing to the project at all). We will evaluate each individual's contribution on the basis of a variety of factors, including progress reports at weekly meetings, through inspecting version control history, through each students' self-reflection, and through each students' peer evaluation {during and/or} at the end of the project. We will make regular efforts to collect and distribute this feedback throughout the project — our ultimate goal is for all students to participate and receive full marks.
 
@@ -28,8 +30,8 @@ Remember: The basic policy is that you are **responsible for the code you submit
 ### Late Policy
 Your work is late if it is not turned in by the deadline. 
 For individual submissions (i.e., Individual Projects):
-* 10% will be deducted for late assignments turned in within 24 hours after the due date.
-* Assignments submitted more than 24 hours late will receive a zero.
+* 10% will be deducted for late work turned in within 24 hours after the due date.
+* Work submitted more than 24 hours late will receive a zero.
 
 For group submissions (i.e., Final Project and Group Activities):
 * No late submission is allowed.
@@ -38,9 +40,9 @@ If you're worried about being busy around the time of a HW submission, please pl
 
 **For fairness to all, there are no exceptions to the above rules.**
 
-## Activities and Attendance:
+## Activities and Attendance Policy:
 
-Most lectures will feature interactive activities (similar to labs) and/or polls that support the material being presented. You must be present in class to participate in the activity or take the poll (participating in an activity while not attending the synchronous session will be considered academic dishonesty and will be treated harshly). Attendance for any lecture or synchronous meeting that involves activities, 'work on project' sessions, project-related meetings, project demos/presentations is **required**. In addition, each instructor may have a different style for assigning participation grades, but historical grading information suggests that each style results in a similar overall grade distribution. Participation grades will be posted on Canvas, and will be updated regularly. 
+Most lectures will feature interactive activities (similar to labs) and/or polls that support the material being presented. You must be present in class to participate in the activity or take the poll (participating in an activity while not attending the synchronous session will be considered academic dishonesty and will be treated harshly). **Attendance for any lecture or synchronous meeting that involves activities, 'work on project' sessions, project-related meetings, project demos/presentations is required**. In addition, each instructor may have a different style for assigning participation grades, but historical grading information suggests that each style results in a similar overall grade distribution. Participation grades will be posted on Canvas, and will be updated regularly. 
 
 Sometimes you cannot avoid missing a class. If you need to be away from class, it is your responsibility to inform the instructor {as soon as possible, preferably before class} to receive credit for any participation and catch up on the materials discussed in the class. University policy on attendance can be found [here](https://catalog.northeastern.edu/undergraduate/academic-policies-procedures/attendance-requirements/). 
 
