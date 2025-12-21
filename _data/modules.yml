@@ -4,8 +4,14 @@
 mod1:
   name: Orientation & Requirements
   page: 
+mod2a:
+  name: Requirements Analysis
+  page: /modules/2-requirements-to-tests
+mod2b:
+  name: Test-Driven Development
+  page: /modules/2-requirements-to-tests
 mod2:
-  name: Typescript & Test Driven Development
+  name: From Requirements to Tests
   page: /modules/2-requirements-to-tests
 mod3:
   name: Test Adequacy
