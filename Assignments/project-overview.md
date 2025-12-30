@@ -18,10 +18,10 @@ All implementation will take place in the TypeScript programming language, using
 | -----| ----------- | ----------- |
 | 01/28/2026| Team Formation Survey | Specify preferences for teammates |
 | 02/02/2026| Project Kick-off Meeting | Schedule a meeting with your Mentor TA during **this week** |
-| 02/11/2026 | [Preliminary Project Plan] | Propose a new feature for GameNite project that can be planned and implemented within 7 weeks |
-| 02/25/2026 | [Revised Project Plan] | Refine the scope of your feature based on staff feedback, define detailed requirements and project acceptance criteria. |
-| 04/10/2026 | [Project Delivery - Implementation and Documentation] | Deliver/Deploy your new features, including design documentation and tests |
-| 04/20/2026 | [Individual Reflection] | Deliver/Deploy your new features, including design documentation and tests |
+| 02/11/2026 | Preliminary Project Plan | Propose a new feature for GameNite project that can be planned and implemented within 7 weeks |
+| 02/25/2026 | Revised Project Plan | Refine the scope of your feature based on staff feedback, define detailed requirements and project acceptance criteria. |
+| 04/10/2026 | Project Delivery - Implementation and Documentation | Deliver/Deploy your new features, including design documentation and tests |
+| 04/20/2026 | Individual Reflection | Reflect on the evolution of your project, process and team dynamics |
 
 ### Summary of Project Grading
 Your overall project grade (which will account for 40% of your final grade in this course) will be the weighted average of each of the deliverables.
