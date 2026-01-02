@@ -139,7 +139,6 @@ You can test the server by going to the `server` directory and running `npm run 
 ## 3. Recommendations when working on the project
 
 1. Open the client application in a browser and interact with it. While interacting, monitor the application tab in the browser’s developer tools. The application tab will give you information about the HTTP requests the client sends to the server. The HTTP requests will contain URIs in their headers. You can use this information to understand the endpoints in the server.
-2. Use Postman to interact with and manually test your solutions and verify that database queries work as expected.
 3. Make sure VS Code is set up as described in the development environment tutorial, with ESLint, Typescript, and Prettier installed.
 4. Do not wait until the last minute to run npm run lint and npm run build to check for linter and typescript errors!
 5. Follow the debugging policy to help in the debugging process.
@@ -148,7 +147,7 @@ You can test the server by going to the `server` directory and running `npm run 
 
 We will grade your code on GitHub by using the "Feedback" PR that is automatically created when the assignment is. Grades will be assigned on Gradescope.
 
-On Gradescope, you will submit a plain `.txt` file containing three things:
+On Gradescope, you will submit a plain `.txt` file containing two things:
 
  1. The link to your project's GitHub repo (e.g. `https://github.com/neu-cs4530/ip1-robsimmons`)
  2. The written responses and cURL commands requested in Task 3.
@@ -182,18 +181,18 @@ The Actions tab on GitHub has the results of previous runs.
 ### Task 1: Tic-Tac-Toe
 
 You should try to start a game of Tic-Tac-Toe in the development server. 
-(Log in as two different users in two different windows.) Tic-Tac-Toe does not work! To make Tic-Tac-Toe work on GameNite, you'll need to fill in the missing implementation in `server/src/games/ticTacToe.ts`.
+(Log in as two different users in two different windows.) You should observe that other games work, but Tic-Tac-Toe does not! To make Tic-Tac-Toe work on GameNite, you'll need to fill in the missing implementation in `server/src/games/ticTacToe.ts`.
 
 Places to look for guidance:
  - The type specification for a game implementation in `server/src/games/gameLogic.ts`, explains what each unimplemented function does.
- - The types of Tic-Tac-Toe in `shared/src/games/ticTacToe.ts`, explain how the game is intended to work.
+ - The types of Tic-Tac-Toe in `shared/src/games/ticTacToe.ts`, explain in detail how the game is intended to work.
  - The implementations of Nim and Guessing Game in the directory `server/src/games`, which may be a helpful basis for comparison.
 
 ### Task 2: Tests for Tic-Tac-Toe
 
-The purpose of this part of the assignment is to get used to writing Vitest tests. *(Copilot-esque LLM autocompletion is quite good at completing tests. If you have Copilot-style autocompletion enabled, you are violating the course's academic integrity policy and risking a failing grade, and in addition, this task will be exceptionally pointless and boring.)*
+The purpose of this part of the assignment is to get used to writing Vitest tests. *(Copilot-esque LLM autocompletion is quite good at writing tests, and you'll have a chance to try this out later in the class. If you have Copilot-style autocompletion enabled, you are violating the course's academic integrity policy and risking a failing grade, and in addition, this task will be exceptionally pointless and boring.)*
 
-Write tests for Tic-Tac-Toe in a new file, `server/tests/games/ticTacToe.spec.ts`. Your tests should achieve full branch coverage: when you run `npm run test` in the `server` directory, Vitest should report no "Uncovered Line #s" in `src/games/ticTacToe.ts`.
+Write tests for Tic-Tac-Toe in a new file, `server/tests/games/ticTacToe.spec.ts`. Your tests should achieve full branch coverage: when you run `npm run test` in the `server` directory, Vitest should report no "Uncovered Line #s" in `src/games/ticTacToe.ts`. Make sure to look at the tests for Nim and Guessing Game, they will provide an excellent guide.
 
 ### Task 3: Exposing Errors in the User Service
 
