@@ -1,20 +1,20 @@
 ---
 layout: page
-title: Typescript Basics
+title: TypeScript Basics
 permalink: /tutorials/week1-typescript-basics
 parent: Tutorials
 nav_order: 2
 ---
 
-# Typescript Basics
+# TypeScript Basics
 
-This tutorial describes the basic concepts and syntax of typescript with code examples. Typescript is treated here as an extension of JavaScript, but it requires no prior knowledge to follow along.
+This tutorial describes the basic concepts and syntax of TypeScript with code examples. TypeScript is treated here as an extension of JavaScript, but it requires no prior knowledge to follow along.
 
-You can run the examples on [Online Typescript Editor](https://www.typescriptlang.org/play) . 
+You can run the examples on [Online TypeScript Editor](https://www.typescriptlang.org/play) . 
 
 Contents:
 
-*   [Types in Typescript](#types-in-typescript)
+*   [Types in TypeScript](#types-in-typescript)
     *   [Boolean](#boolean)
     *   [Number](#number)
     *   [BigInt](#bigint)
@@ -25,7 +25,7 @@ Contents:
     *   [Any](#any)
     *   [Unknown](#unknown)
     *   [Literal](#literal)
-*   [Variable declaration in typescript](#variable-declaration-in-typescript)
+*   [Variable declaration in TypeScript](#variable-declaration-in-typescript)
 *   [Objects](#objects)
 *   [Control Flow Statements](#control-flow-statements)
     *   [Equality vs Strict Equality](#equality-vs-strict-equality)
@@ -50,7 +50,7 @@ Contents:
 *   [Custom types](#custom-types)
 *   [Generics](#generics)
 *   [Modules](#modules)
-*   [Object oriented programming concepts using typescript](#object-oriented-programming-concepts-using-typescript)
+*   [Object oriented programming concepts using TypeScript](#object-oriented-programming-concepts-using-typescript)
     *   [Inheritance](#inheritance)
     *   [Polymorphism](#polymorphism)
     *   [Abstraction](#abstraction)
@@ -58,9 +58,9 @@ Contents:
 *   [General Guidelines](#general-guidelines)
 *   [tsconfig](#tsconfig)
 
-Typescript is a superset of JavaScript. Thus, all JavaScript code is valid Typescript code. Typescript introduces concepts of optional typing, modules, and few additional features to Javascript. Let us begin by extending JavaScript to use the features of Typescript and primitive types.
+TypeScript is a superset of JavaScript. Thus, all JavaScript code is valid TypeScript code. TypeScript introduces a new concept, _optional typing_, to JavaScript. Let us begin by extending JavaScript to use the features of TypeScript and primitive types.
 
-## Types in typescript
+## Types in TypeScript
 
 ### Boolean
 
@@ -69,10 +69,10 @@ The boolean type has two values: true and false.
 Example:
 ```ts
 let a = true                // boolean
-     var b = false               // boolean
-     const c = true              // true
-     let d: boolean = true       // boolean
-     let e: true = true          // true
+var b = false               // boolean
+const c = true              // true
+let d: boolean = true       // boolean
+let e: true = true          // true
 ```
 *   _Usage_: 
 You can compare them (with ==, ===, ||, &&, and ?), negate them (with !).
@@ -87,7 +87,7 @@ var b = Infinity * 0.10     // number
 const c = 5678              // 5678
 let d = a < b               // boolean
 let e: number = 100         // number
-let f: 26.218 = 26.218
+let f: 26.218 = 26.218      // number
 ```
 
 *   _Usage_: 
@@ -248,9 +248,9 @@ let status: "pass" = "pass"; // This can only ever be the string "pass".
 These types act like constants and can only have one exact value, adding stricter type safety to your code. If you try to modify them an error will be thrown.
 
 
-## Variable declaration in typescript
+## Variable declaration in TypeScript
 
-Variables can be declared in Typescript using one of 3 keywords:
+Variables can be declared in TypeScript using one of 3 keywords:
 
 *   _var_:  var declarations are accessible anywhere within their containing function, module, namespace, or global scope - all which we’ll go over later on - regardless of the containing block. Some people call this var-scoping or function-scoping. Parameters are also function scoped. **Note: In modern TypeScript, you should avoid using `var` and prefer `let` or `const` instead.**
 *   _let_: When a variable is declared using let, it uses what some call lexical-scoping or block-scoping. Unlike variables declared with var whose scopes leak out to their containing function, block-scoped variables are not visible outside of their nearest containing block.
@@ -313,7 +313,7 @@ const person: Person = {
 
 ## Control Flow Statements
 
-Typescript contains the following control flow statements:
+TypeScript contains the following control flow statements:
 
 *   If-Else
 *   Switch
@@ -390,7 +390,7 @@ let y: string = (str.includes("A")) ? "The string contains A" : "The string does
 
 ## Equality vs Strict Equality
 
-Typescript/JavaScript contain 2 equality operators:
+TypeScript/JavaScript contain 2 equality operators:
 
 *   `==`: Compares only the value of entities being compared. Performs implicit type coercions, which may lead to unexpected results.
 *   `===`: Compares the type and value of entities being compared.
@@ -417,7 +417,7 @@ We recommend using strict equality (`===`) in all cases, and this recommendation
 
 ## Loops
 
-Typescript contains the following loops:
+TypeScript contains the following loops:
 
 *   For
 *   While
@@ -566,9 +566,9 @@ var newArr = arr.filter(function(record) {
 
 *   There is a lot you can do with functions in JavaScript like assign them to variables, pass them to other functions, return them from functions, assign them to objects and prototypes, write properties to them, read those properties back, and so on, and TypeScript models all of those things with its rich type system, which we just learnt. 
 
-*   Typescript enables us to set the types for our function parameters and our return type.
+*   TypeScript enables us to set the types for our function parameters and our return type.
 
-*   Functions in Typescript are defined as below:
+*   Functions in TypeScript are defined as below:
 ```ts
 function functionName(argument1: <type>, defaultArgument: <type> = value, optionalArgument?: <type>): <return type> {
     // Function body
@@ -788,7 +788,7 @@ class SpecialPerson extends Person {
 ``` 
 ## Creating an abstract class
 
-*   Define an abstract class in Typescript using the abstract keyword. Abstract classes are mainly for inheritance where other classes may derive from them. We cannot create an instance of an abstract class.
+*   Define an abstract class in TypeScript using the abstract keyword. Abstract classes are mainly for inheritance where other classes may derive from them. We cannot create an instance of an abstract class.
 
 *   An abstract class typically includes one or more abstract methods or property declarations. The class which extends the abstract class must define all the abstract methods.
  
@@ -854,7 +854,7 @@ userInput = "new input";
 
 ## Interfaces
 
-Interfaces are used to define contracts for interaction with external entities. If an interface has a property/method, an Object/Class which implements it _must_ have it. Interfaces can be used to define custom types for Objects in Typescript.
+Interfaces are used to define contracts for interaction with external entities. If an interface has a property/method, an Object/Class which implements it _must_ have it. Interfaces can be used to define custom types for Objects in TypeScript.
 
 Examples:
 ```ts
@@ -886,7 +886,7 @@ const person: IPerson = new Person();
 ## Custom types
 
 *   For complicated types (usually required for Objects), it is recommended to use an interface.
-*   Additionally, typescript contain the 'type' keyword which can be used to create new types.
+*   Additionally, TypeScript contain the 'type' keyword which can be used to create new types.
 *   This is generally used when a union of different types is required.
 
 Examples:
@@ -941,7 +941,7 @@ interface IMyInterface<T> {
 
 ## Modules
 
-A Module in typescript is defined by using the 'import' or 'export' keywords within a file. Variables declared in a module are scoped locally and are not added to the global scope.
+A Module in TypeScript is defined by using the 'import' or 'export' keywords within a file. Variables declared in a module are scoped locally and are not added to the global scope.
 
 *   **export** makes the variables and functions from a file visible outside it.
 *   **import** allows us to use variables and functions exported by another file.
@@ -975,7 +975,7 @@ subtract(2, 1);
 
 // multiply cannot be imported.
 ``` 
-## Object oriented programming concepts using typescript  
+## Object oriented programming concepts using TypeScript  
 
 Object Oriented Programming or OOP is a programming paradigm that has four principles which are:
 
@@ -1121,7 +1121,7 @@ get Balance(): number {
     *   Use camelCase for variable and function names.
     *   Use PascalCase for Class and constructor function names.
 *   Prefer descriptive names over random letters.
-*   Although typing is optional in typescript, it is not optional for this course.
+*   Although typing is optional in TypeScript, it is not optional for this course.
 *   Always use strict equality.
 *   Use a linter. (as specified on course website)
 *   Use a prettifier. (If the linter doesn't do it already)
