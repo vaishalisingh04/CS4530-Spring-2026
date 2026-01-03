@@ -40,7 +40,6 @@ Contents:
     *   [Invoking the function](#invoking-the-function)
     *   [Optional and Default Parameters](#optional-and-default-parameters)
     *   [Rest Parameters](#rest-parameters)
-    *   [Functions as Constructors](#functions-as-constructors)
     *   [Arrow Functions](#arrow-functions)
     *   [Function Overloads](#function-overloads)
 *   [Classes](#classes)
@@ -168,11 +167,14 @@ const e = [2, 'b']          // (string | number)[]
  
 let f = ['red']
 f.push('blue')
-let g = []                  // any[]
+
+// Avoid declaring arrays without types
+let g = []                  // any[] - not recommended
 g.push(1)                   // number[]
 g.push('red')               // (string | number)[]
- 
-let h: number[] = []        // number[]
+
+// Best practice: explicitly type empty arrays
+let h: number[] = []        // number[] - recommended approach
 h.push(1)                   // number[]
 ```
 ### Tuples
@@ -250,9 +252,9 @@ These types act like constants and can only have one exact value, adding stricte
 
 Variables can be declared in Typescript using one of 3 keywords:
 
-*   _var_:  var declarations are accessible anywhere within their containing function, module, namespace, or global scope - all which we’ll go over later on - regardless of the containing block. Some people call this var-scoping or function-scoping. Parameters are also function scoped.
+*   _var_:  var declarations are accessible anywhere within their containing function, module, namespace, or global scope - all which we’ll go over later on - regardless of the containing block. Some people call this var-scoping or function-scoping. Parameters are also function scoped. **Note: In modern TypeScript, you should avoid using `var` and prefer `let` or `const` instead.**
 *   _let_: When a variable is declared using let, it uses what some call lexical-scoping or block-scoping. Unlike variables declared with var whose scopes leak out to their containing function, block-scoped variables are not visible outside of their nearest containing block.
-*   _const_: They are like let declarations but, as their name implies, their value cannot be changed once they are bound. In other words, they have the same scoping rules as let, but you can’t re-assign to them.
+*   _const_: They are like let declarations but, as their name implies, their value cannot be changed once they are bound. In other words, they have the same scoping rules as let, but you can’t re-assign to them. **Prefer `const` by default, and only use `let` when you need to reassign the variable.**
 
 The syntax of declarations is as below:
 ```ts
@@ -279,12 +281,33 @@ let uninitialized: any;
 Examples:
 
 ```ts
+// Avoid using 'any' type for objects
 const myObj: any = {
     key1: 'value1',
     key2: 'value2'
 };
 
 console.log(myObj.key1); // prints 'value1'
+
+// Better: explicitly type your objects
+const myTypedObj: { key1: string; key2: string } = {
+    key1: 'value1',
+    key2: 'value2'
+};
+
+console.log(myTypedObj.key1); // prints 'value1'
+
+
+// For reusable objects, use interfaces (covered later)
+interface Person {
+    name: string;
+    age: number;
+}
+
+const person: Person = {
+    name: 'John',
+    age: 30
+};
 ```
     
 
@@ -369,16 +392,26 @@ let y: string = (str.includes("A")) ? "The string contains A" : "The string does
 
 Typescript/JavaScript contain 2 equality operators:
 
-*   `==`: Compares only the value of entities being compared.
+*   `==`: Compares only the value of entities being compared. Performs implicit type coercions, which may lead to unexpected results.
 *   `===`: Compares the type and value of entities being compared.
+
+While `===` always compares by reference for objects and arrays, `==` attempts type coercion before comparison.
 
 Example:
 ```ts
-if(0 == '0') { } // Evaluates to true despite comparing string to number.
+// Evaluates to true despite comparing string to number due to type coercion. 
+if(0 == '0') {
+  console.log("String '0' is coerced to number 0");
+ } 
 
-if(0 === '0') { } // Evaluated to false because types are different.
+if (0 == false) {
+    console.log("false is coerced to 0");
+} 
+
+if(0 === '0') {
+  console.log("Will not print because types are different");
+ } // Evaluated to false because types are different.
 ``` 
-    
 
 We recommend using strict equality (`===`) in all cases, and this recommendation is enforced by our linter.
 
@@ -393,15 +426,15 @@ Typescript contains the following loops:
 Examples:
 ```ts
 for(let i: number = 0; i < 10; i++) {
-
+   console.log(i);
 }
 
 while(condition) {
-
+  // statements
 }
 
 do {
-
+  // statements
 } while(condition)
 ``` 
 
@@ -409,7 +442,21 @@ Tips:
 
 - **Entry-Level Loops:** `for` and `while` loops are entry-level loops; they evaluate their condition before executing any statements.
 - **Exit-Level Loop:** The `do...while` loop is an exit-level loop; it will always execute the loop body at least once, regardless of the condition.
+- **Prefer Array Operators:** When working with arrays, you should replace explicit loops with array operators like `.map()`, `.filter()`, `.reduce()`, and `.forEach()` when possible. These provide clearer, more functional code. For examples of how to use these array operators, see the Array Functions section below.
 
+Example of replacing a loop with array operators:
+```ts
+// Instead of this:
+const numbers = [1, 2, 3, 4, 5];
+const doubled = [];
+for(let i = 0; i < numbers.length; i++) {
+    doubled.push(numbers[i] * 2);
+}
+
+// Prefer this:
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+```
 
 ## Array Functions
 
@@ -417,7 +464,7 @@ ForEach, Map, reduce, and filter are all array methods in JavaScript. Each one w
 
 ### ForEach
 
-forEach() method calls a function for each element in the array. It returns the resultant array.
+forEach() method calls a function for each element in the array. Unlike map, filter, and reduce, forEach does not return a value.
 
 Syntax
 ```ts
@@ -601,36 +648,6 @@ sum(1, 2, 3); // evaluates to 6
 sum(4, 5); // evaluates to 9
 ```
 
-## Functions as Constructors
-
-In Typescript/Javascript, functions can be used as constructors for creating objects. This is similar to classes, but not quite the same.
-For example:
-*   Constructors can’t have type parameters - these belong on the outer class declaration
-*   Constructors can’t have return type annotations - the class instance type is always what’s returned
-
-```ts
-function Person(this: any, firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.getFullName = function(): string {
-        return this.firstName + ' ' + this.lastName;
-    }
-}
-const person1 = new Person('first', 'last');
-console.log(person1.getFullName()); // Returns 'first last'.
-
-class Point {
-  x: number;
-  y: number;
- 
-  // Normal signature with defaults
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
-  }
-}
-```
-
 ## Arrow Functions
 
 Arrow Functions (also called fat arrow functions) are functions which have lexical 'this' and 'arguments'. This are especially useful in class methods to preserve the context when using higher order functions.
@@ -644,6 +661,33 @@ let sum = (x: number, y: number): number => {
 sum(10, 20); //returns 30
 ```
 In the above example, sum is an arrow function. (x:number, y:number) denotes the parameter types, :number specifies the return type. The fat arrow => separates the function parameters and the function body. The right side of => can contain one or more code statements.
+
+**Demonstrating the difference with `this` binding:**
+```ts
+class Counter {
+    count: number = 0;
+    // Using a regular function
+    incrementWithRegularFunction() {
+        setTimeout(function() {
+            this.count++; // Error: 'this' is undefined
+            console.log(this.count);
+        }, 1000);
+    }
+
+    // Using an arrow function
+    incrementWithArrowFunction() {
+        setTimeout(() => {
+            this.count++; // 'this' refers to the Counter instance
+            console.log(this.count);
+        }, 1000);
+    }
+}
+
+const counter = new Counter();
+counter.incrementWithArrowFunction(); // Logs: 1
+```
+
+In the example above, the arrow function in `incrementWithArrowFunction()` maintains the reference to the `Counter` instance, while a regular function `incrementWithRegularFunction` would lose the `this` context.
 
 ## Function Overloads
 
@@ -673,7 +717,7 @@ Classes are blueprints for creating objects.
 
 *   They can contain _properties_, _methods_, and a _constructor_.
 *   All members of a class can have an access modifier: _public_, _protected_, _private_.
-*   Members can also be _static_ (shared across all instances of the class) and _final_ (immutable).
+*   Members can also be _static_ (shared across all instances of the class) and _readonly_ (immutable).
 *   Class properties may have _getters_ and _setters_.
 *   Classes can extend other classes.
 *   Classes can implement interfaces.
@@ -690,13 +734,13 @@ Examples:
 ```ts
 class Person {
 
-    private firstName: string = '';
-    protected middleName: string;
-    public lastName: string = '';
+    private _firstName: string = '';
+    protected middleName!: string;
+    public _lastName: string = '';
 
-    private static final NeverGonnaGiveYouUp: any;
-    protected static final NeverGonnaLetYouDown: any;
-    public static final isRickRolled: boolean = true;
+    private static readonly NeverGonnaGiveYouUp: any;
+    protected static readonly NeverGonnaLetYouDown: any;
+    public static readonly isRickRolled: boolean = true;
 
     constructor() {
         // I execute when you call new Person().
@@ -709,8 +753,9 @@ class Person {
     }
 
     protected childClassesCanCallMe(): void {
-        this.onlyPersonCanCallMe();
+        this.onlyAccessibleInsidePerson();
     }
+
     
     private onlyAccessibleInsidePerson(): void {
         // I lied, anyone can call me if you know how.
@@ -718,16 +763,16 @@ class Person {
     }
 
     public get firstName(): string {
-        return this.firstName;
+        return this._firstName;
     }
 
-    public set firstName(firstName: string): void {
-        this.firstName = firstName;
+    public set firstName(firstname: string){
+        this._firstName = firstname;
     }
 
 }
 
-const person = Person();
+const person = new Person();
 person.firstName = 'first';
 console.log(person.firstName);
 person.anyoneCanCallMe();
@@ -858,8 +903,8 @@ const student: IStudent = {
     name: 'name',
     age: 20,
     studentID: 111111111,
-    gender: 'hidden'
-    isEnrolled: true;
+    gender: 'hidden',
+    isEnrolled: true
 };
 
 type StringOrNumber = string | number;
