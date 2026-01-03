@@ -12,8 +12,6 @@ The individual and group projects for this course place you in the role of the m
 
 GameNite is a web application that consists of some code that runs in each client's web browser, and also code that runs on a server. By the end of the semester, you’ll propose, design, implement, and test new features for our project. We understand that some of you may have some web development experience, but don’t expect that most of you do, the goal of this first project is to get you up to speed with our existing codebase and development environment.
 
-## 1. Objectives of This Assignment
-
 The objectives of this assignment are to:
 
 - Get you familiar with the basics of TypeScript, VSCode, and the project codebase
@@ -22,7 +20,7 @@ The objectives of this assignment are to:
 - Learn how to write unit tests with Vitest
 - Translate high-level requirements into code
 
-## 2. Getting Started With This Assignment
+## 1. Getting Started
 
 If you were registered for the class before Monday, January 5, you should have an email from a TA with an invitation to our organization. Check your spam/junk folder and accept the invitation if you don't have it. If you cannot find the invitation, if you registered for the class late, or have any other issue that keeps you from getting started, please create a Piazza post to contact us and we will try to help.
 
@@ -30,7 +28,7 @@ After that accept our [GitHub Classroom Invitation for this assignment] (XXX TOD
 
 If you are new to Git, you may want to work on "Learning Basics of Git" [assignment](https://classroom.github.com/a/QkL5qQ90) first!
 
-### 2.1. Prerequisites
+### 1.1. Prerequisites
 
 You'll need to start by [setting up your development environment]({{site.baseurl}}{% link tutorials/week1-getting-started.md %}), including node.js and npm.
 
@@ -66,7 +64,7 @@ After that, follow the following steps:
 
    This will give you a url to go to, probably <http://localhost:4530/>. If you see a login page, then you’re up and running. You can create a new user or use one of the four automatically-created username-password combinations: `user0/pwd0000`, `user1/pwd1111`, `user2/pwd2222`, or `user3/pwd3333`.
 
-### 2.2. Understanding "The Server"
+### 1.2. Understanding "The Server"
 
 The code in the server directory is all TypeScript that is intended to be run on a web server. It’s built on top of [express](https://expressjs.com/), a library used to create programs that accept and respond to HTTP requests. Express can do a lot of things, but we’re only going using it to send and receive chunks of JSON-formatted data (line 18 of `sever/src/app.ts` (XXX TODO check) tells the Express library to behave that way).
 
@@ -105,13 +103,13 @@ You may find that it’s easier to make HTTP POST requests from a tool like Post
 
 There is a whole vocabulary of HTTP requests, but you the most important two for this class are GET and POST.
 
-### 2.3. Understanding "The Client"
+### 1.3. Understanding "The Client"
 
 The code in the `client` directory is mostly TypeScript that is intended to be run in a web browser. But web browsers don’t know how to run TypeScript, they only know how to run JavaScript. While you’re working on a project, it’s important to be able to be able to look at what your code is doing in a web browser, and when you’re done working on your project, all your code needs to be turned into a form that can get shipped to a web browser.
 
 Strategy.town uses [Vite](https://vite.dev/) for this. Vite is a _build tool_ — you use to preview the website you’re building, and you use it to build the final website that you ship to users.
 
-### 2.4. Shared Code
+### 1.4. Shared Code
 
 The TypeScript types in the shared directory are used by both the client and the server. The data sent by HTTP POST request to create a post has the TypeScript type `WithAuth<CreateThreadMessage>`, which, if you look at `shared/src/auth.types.ts` and `shared/src/thread.types.ts`, you can see expands to this TypeScript interface:
 
@@ -130,20 +128,20 @@ type TypeOfPostRequest = {
 
 The client can use the `WithAuth<CreateThreadMessage>` type to ensure that it is sending a message with the right structure to the server. Because these types are described with [zod](https://zod.dev/) schema validators, the server can use the same code to check that it received something with the right structure. (Usually the server gets things sent by the client, but as we saw, you can also use cURL to send random nonsense to the server. The server can’t trust anything about the structure of information it receives from a HTTP request!)
 
-### 2.5. Testing
+### 1.5. Testing
 
 Unit tests for the server are in `server/tests/**/*.spec.ts`. These are written in [Vitest](https://vitest.dev/), a tool discussed in one of the first two lectures. (If you’ve used Jest, you should be good to go: Vitest is designed to be very similar.)
 
 You can test the server by going to the `server` directory and running `npm run test`. It can be very helpful to have tests constantly rerunning whenever you edit code, which you can do by running `npm run vitest`.
 
-## 3. Recommendations when working on the project
+## 2. Recommendations when working on the project
 
 1. Open the client application in a browser and interact with it. While interacting, monitor the application tab in the browser’s developer tools. The application tab will give you information about the HTTP requests the client sends to the server. The HTTP requests will contain URIs in their headers. You can use this information to understand the endpoints in the server.
 3. Make sure VS Code is set up as described in the development environment tutorial, with ESLint, Typescript, and Prettier installed.
 4. Do not wait until the last minute to run npm run lint and npm run build to check for linter and typescript errors!
 5. Follow the debugging policy to help in the debugging process.
 
-## 4. Handing in the project
+## 3. Handing in the project
 
 We will grade your code on GitHub by using the "Feedback" PR that is automatically created when the assignment is. Grades will be assigned on Gradescope.
 
@@ -176,7 +174,7 @@ The Actions tab on GitHub has the results of previous runs.
 
 **Up to 25% of your grade may be deducted for CI failures, and in severe cases we may decline to grade your assignment entirely. Give yourself sufficient time to find and fix any errors.**
 
-## 5. Implementation Tasks
+## 4. Implementation Tasks
 
 ### Task 1: Tic-Tac-Toe
 
@@ -248,7 +246,7 @@ You can add additional exported functions from `auth.service.ts` if needed — y
 
 Moving these functions will break a lot of other parts of the server, but using TypeScript, the linter, and your tests, it should not be too arduous to find what broke and fix it. 
 
-## Grading
+## 5. Grading
 
 - Task 1: 25 points
 - Task 2: 20 points
