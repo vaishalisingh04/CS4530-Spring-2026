@@ -202,7 +202,7 @@ The first and most glaring is that some of the functions, despite claiming to re
 
  3. In the written part of your submission, briefly explain why TypeScript allowed a SafeUserInfo-returning service function to include a password field despite SafeUserInfo having no password field.
 
- 4. **Challenge**: there's another security bug in the user service that's a little more difficult to find. Identify the bug and include a cURL command that demonstrates it, explain why the cURL command demonstrates something bad happening, create a failing test, and fix the bug. (This is just worth 5% of the overall score for this assignment. Don't get stuck here and neglect the other tasks!)
+ 4. **Challenge**: there's another definite bug in the user service that's a little more difficult to find, but that could potentially represent a security issue. Identify the bug and include a cURL command that demonstrates it, explain why the cURL command demonstrates something bad happening, create a failing test, and fix the bug. (This is just worth 5% of the overall score for this assignment. Don't get stuck here and neglect the other tasks!)
 
 ### Task 4: Creating an Auth model
 
