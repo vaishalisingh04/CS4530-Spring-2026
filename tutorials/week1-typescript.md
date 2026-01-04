@@ -938,6 +938,89 @@ interface IMyInterface<T> {
 }
 ``` 
     
+## Modules
+
+Each TypeScript file in our project is a separate [JavaScript module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). By default nothing defined in one module can be used in another module.
+
+*   **export** makes the variables and functions from a module visible outside it.
+*   **import** allows us to use variables and functions exported by another module.
+
+There are two ways of exporting from a JavaScript or TypeScript module: adding `export` before the functions declaration (like `add` and `someVar` in the example below), and writing a separate `export` statemen (like `subtract` in the example below:
+
+```ts
+// file1.ts
+
+export interface Message {
+  msg: string
+}
+
+export function add(x: number, y: number): number {
+  return x + y;
+}
+
+function subtract(x: number, y: number): number {
+  return x - y;
+}
+
+export const someVar: Message = { msg: 'Variables can be exported too.' };
+
+function multiply(): void {
+  throw new Error();
+}
+
+export { subtract };
+```
+
+Import statements allow exported parts of one module to be used in another module. Imported TypeScript types need to be prefixed with `type`.
+
+```ts
+// file2.ts
+import { add, someVar, subtract, type Message } from './file1.ts';
+
+add(1, 2);
+subtract(2, 1);
+console.log(someVar);
+const myMessage: Message = { msg: 'Hello' };
+console.log(myMessage);
+```
+
+### Default Imports
+
+A module can have at most one **default** export. The default export is marked with the `default` keyword after `export`. 
+
+```ts
+// file3.ts
+export default function addOne(x: number): number {
+  return x + 1;
+}
+
+export function addTwo(x: number): number {
+  return x + 2;
+}
+```
+
+A default export is imported without the curly braces:
+
+```ts
+// file4.ts
+import addOne from './file3.ts';
+import { addTwo } from './file3.ts';
+
+addOne(41);
+addTwo(65);
+```
+
+It's possible to combine default and non-default imports into a single line:
+
+```ts
+// file4.ts
+import addOne, { addTwo } from './file3.ts';
+
+addOne(41);
+addTwo(65);
+```
+
+In React projects, the single React component exported from a file is usually a default export.
 
 ## Object oriented programming concepts using TypeScript  
 
