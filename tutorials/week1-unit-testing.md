@@ -1,19 +1,19 @@
 ---
 layout: page
-title: Unit Testing with Jest (replace by ViTest)
+title: Unit Testing with Vitest
 permalink: /tutorials/week1-unit-testing
 parent: Tutorials
 nav_order: 4
 ---
 
-This tutorial covers the basics on unit testing with Jest. By the end of this tutorial, you will have an introduction to unit testing with jest, best practices, and some handy tricks and tips to use in your tests. Starter code is available [here](./assets/week1-unit-testing/jest-tutorial-starter-code.zip), and finished code with tests covered in this tutorial can be found [here](./assets/week1-unit-testing/jest-tutorial-solution.zip). We strongly recommend using the completed solution only for reference and implementing the tutorial step by step from the starter code.
+This tutorial covers the basics on unit testing with Vitest. By the end of this tutorial, you will have an introduction to unit testing with Vitest, best practices, and some handy tricks and tips to use in your tests.
 
 _Note:_ Run `npm i` on the handouts before proceeding to update/run the tests.
 
 Contents:
 
 - [Understanding Unit Testing](#understanding-unit-testing)
-- [Testing with Jest](#testing-with-jest)
+- [Testing with Vitest](#testing-with-vitest)
   - [Basics](#basics)
     - [Specs](#specs)
   - [Matchers](#matchers)
@@ -31,35 +31,32 @@ Contents:
     - [Promise](#promise)
     - [Callbacks](#callbacks)
   - [UI Testing](#ui-testing)
-- [Setting up testing using Jest in VSCode](#setting-up-testing-using-jest-in-vscode)
+- [Setting up testing using Vitest in VSCode](#setting-up-testing-using-vitest-in-vscode)
   - [Features](#features)
+  - [Requirements](#requirements)
   - [Installation](#installation)
     - [Direct Installation](#direct-installation)
     - [From Visual Studio Marketplace](#from-visual-studio-marketplace)
-    - [Additional Extensions and Libraries](#additional-extensions-and-libraries)
-  - [Configuration](#configuration)
+  - [Verifying Installation](#verifying-installation)
+  - [Project Configuration](#project-configuration)
+  - [Using the Extension](#using-the-extension)
   - [Debugging Tests](#debugging-tests)
+  - [Extension Settings](#extension-settings)
+  - [Troubleshooting](#troubleshooting)
 - [General Guidelines For Writing Tests](#general-guidelines-for-writing-tests)
-- [Appendix: Using Vitest as an Alternative to Jest](#appendix-using-vitest-as-an-alternative-to-jest)
-    - [Why Vitest?](#why-vitest)
-    - [Installation](#installation-1)
-    - [Setup](#setup)
-    - [Writing Tests](#writing-tests)
-    - [Mocking](#mocking)
-    - [Running Tests](#running-tests)
 
 
 # Understanding Unit Testing
-At some point, every programmer has wondered why they should spend time writing test cases instead of focusing on implementing a new feature. The reason for this is that it is important! In this tutorial, we'll go through several aspects of unit testing, with a focus on utilizing Jest. Before we get into that, let's define unit testing and why it's so important in the real world.
+At some point, every programmer has wondered why they should spend time writing test cases instead of focusing on implementing a new feature. The reason for this is that it is important! In this tutorial, we'll go through several aspects of unit testing, with a focus on utilizing Vitest. Before we get into that, let's define unit testing and why it's so important in the real world.
 
 Unit testing is not a new concept; it has been around for a long time. "Unit tests are often automated tests prepared and executed by software engineers to check that a portion of an application (referred to as a "unit") matches its design and behaves as expected," according to Wikipedia. So, to put it another way, it's a technique to undertake rigorous testing of every single function/module in isolation.
 
-Unit testing technques:
-- **Black Box Testing** : It is a process of validating a function's input and output without any knowledge of it's internal implementation details.
+Unit testing techniques:
+- **Black Box Testing** : It is a process of validating a function's input and output without any knowledge of its internal implementation details.
 - **White Box Testing** : Unlike Black Box testing, white box testing focuses on testing the specific internal code flows, uncovering any unidentified error or bug in that component.
-- **Gray Box Testing**  : Gray Box testing is a combination of the two above wherein partial knowledge of the internal code is needed. This strategy lowers a tester's reliance on a developer for every minor issue, allowing the tester to detect and resolved it alone.
+- **Gray Box Testing**  : Gray Box testing is a combination of the two above wherein partial knowledge of the internal code is needed. This strategy lowers a tester's reliance on a developer for every minor issue, allowing the tester to detect and resolve it alone.
 
-# Testing with Jest
+# Testing with Vitest
 ## Basics
 
 
@@ -77,10 +74,10 @@ To understand the basics of unit testing, let us look at the file called 'calcul
   }
   ```
 
-Let us write some tests for this code using jest. The test code will go into a file in the same directory titled 'calculator.spec.ts'. Create this file now. This pattern of 'file-name.spec.ts' is how you should name all of your test files when using jest.
+Let us write some tests for this code using Vitest. The test code will go into a file in the same directory titled 'calculator.test.ts'. Create this file now. This pattern of 'file-name.test.ts' is how you should name all of your test files when using Vitest.
 
 
-All test files start with a suite. A suite is a collection of tests (or a logical grouping of tests). In jest, a suite is created by using the function `describe()`. The suite takes 2 arguments: the 1st being the description of the suite and the second being a callback function. Additionally, suites can be nested to form logical groups.
+All test files start with a suite. A suite is a collection of tests (or a logical grouping of tests). In Vitest, a suite is created by using the function `describe()`. The suite takes 2 arguments: the 1st being the description of the suite and the second being a callback function. Additionally, suites can be nested to form logical groups.
 Suites can further be broken down into 3 components that we will explore in detail shortly:
 
 1. Setup
@@ -120,7 +117,7 @@ A spec is an actual test that executes some code and asserts some result. A test
 Syntax:
 
  ```ts
-  it("should check a specific behaviour", () => {});
+  it("should check a specific behavior", () => {});
   ```
 
 Let us write a simple test for our add() method to check 1 + 1 = 2.
@@ -165,6 +162,8 @@ All three matchers are used to test equality, though they have slight but import
     This is the most commonly used matcher.
 
 ```ts
+  import { describe, it, expect, beforeEach } from 'vitest';
+
   describe("utils > store", () => {
     describe("Store", () => {
       beforeEach(() => {
@@ -199,14 +198,14 @@ All three matchers are used to test equality, though they have slight but import
 
  ```ts
   describe("getData()", () => {
-    it("should return an object with a reference different to Store._data", () => {
+    it("should return an object with the same reference as Store._data", () => {
       const mockData = { key: "value" };
       Store["_data"] = mockData;
 
       const returnedValue = Store.getData();
 
       expect(returnedValue).toEqual(mockData);
-      expect(returnedValue).not.toBe(mockData);
+      expect(returnedValue).toBe(mockData); // Same reference
       expect(Store["_data"]).toBe(mockData);
     });
   });
@@ -233,11 +232,12 @@ All three matchers are used to test equality, though they have slight but import
 ## AAA
 ### Assemble
 
-In order to run a test, we need to first assemble it. This may include creating instances of classes/variables, setting up test data for inputs, setting up spies/stubs/mocks (which will be covered in subsequest sections), or setting up the expected output. In simple cases, one may not need to assemble the test. This phase is very similar to the setup phase.
+In order to run a test, we need to first assemble it. This may include creating instances of classes/variables, setting up test data for inputs, setting up spies/stubs/mocks (which will be covered in subsequent sections), or setting up the expected output. In simple cases, one may not need to assemble the test. This phase is very similar to the setup phase.
 
 In our example, let us create an instance of the Calculator class as part of assembling the test.
 
 ```ts
+  import { describe, it, expect } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -262,6 +262,7 @@ In this step, we actually execute the function under test with required inputs a
 In our example, we will invoke the add() method with inputs (1, 1) and get the result.
 
  ```ts
+  import { describe, it, expect } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -281,7 +282,7 @@ In our example, we will invoke the add() method with inputs (1, 1) and get the r
 
 ### Assert
 
-Assertion is a statement that validates the behavior of our code by comparing the actual result against the expected results. There are many assertions provided by Jest, including some useful assertions we will use throughout our tests. Some of these assertions are listed below:
+Assertion is a statement that validates the behavior of our code by comparing the actual result against the expected results. There are many assertions provided by Vitest, including some useful assertions we will use throughout our tests. Some of these assertions are listed below:
 
 - `expect(actual).toEqual(expected)` // Expects both entities to have the same value.
 - `expect(actual).toBe(expected)` // Expects both entities to be the same.
@@ -291,11 +292,12 @@ Assertion is a statement that validates the behavior of our code by comparing th
 - `expect(actual).not.` // Negates the assertion. Can be chained with any matchers above
 - `await expect(error causing code returning a promise).rejects.toThrowError()` // Waits for the error throwing code that returns promise (e.g. an API call) to throw the error and asserts the error was thrown.
 
-A full list of matchers can be found [here](https://jestjs.io/docs/en/expect).
+A full list of matchers can be found [here](https://vitest.dev/api/expect.html).
 
 In our example, we can use the .toEqual() matcher.
 
 ```ts
+  import { describe, it, expect } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -317,7 +319,7 @@ In our example, we can use the .toEqual() matcher.
 
 Often in tests, we need some things to happen before a test actually runs and some things to happen after it. This may include resetting/initializing values, setting up test data, setting up spies/stubs/mocks, cleaning up variables after a test, or resetting spies/stubs/mocks. Sometimes these steps may need to be repeated for each test. This is where the setup and teardown can be especially useful.
 
-Jest Provides 2 methods for setup and 2 methods for teardown:
+Vitest Provides 2 methods for setup and 2 methods for teardown:
 
 - beforeAll(): Runs one time before all the tests in a suite.
 - beforeEach(): Runs before every test in a suite.
@@ -329,6 +331,7 @@ In our example, notice we created an instance of calculator in our Assemble phas
 _Note:_ Use beforeEach()/afterEach() if the function/class stores state, and we need a clean instance for each test. In our case, calculator does not store any state, and we can share the same instance across tests with out any side effects. Hence, we will use beforeAll()/afterAll().
 
 ```ts
+  import { describe, it, expect, beforeAll, afterAll } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -357,6 +360,7 @@ _Note:_ Use beforeEach()/afterEach() if the function/class stores state, and we 
 Let us add another test to cover a different scenario, such as adding negative numbers.
 
  ```ts
+  import { describe, it, expect, beforeAll, afterAll } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -389,17 +393,18 @@ Let us add another test to cover a different scenario, such as adding negative n
   ```
 
 ## Mock Testing
-As a project grows so do the interdependencies in the project. A function under test can have dependencies from various external entities. This may include other functions, network requests, database connections, or built-in connections. Spies, Stubs, and Mocks are ways of dealing with such external dependencies. You can read more on what you can do with spies/stubs/mocks [here](https://jestjs.io/docs/en/mock-function-api).
+As a project grows so do the interdependencies in the project. A function under test can have dependencies from various external entities. This may include other functions, network requests, database connections, or built-in connections. Spies, Stubs, and Mocks are ways of dealing with such external dependencies. You can read more on what you can do with spies/stubs/mocks [here](https://vitest.dev/api/vi.html).
 
 ### Spy
 
-A spy is a watcher on a function that tracks various properties of the function being spied on. This can return information such as whether a function was invoked, how many times it was invoked, and what argument it was invoked with. A spy on a function is created using the syntax `const spy = jest.spyOn(object, 'methodName');`
+A spy is a watcher on a function that tracks various properties of the function being spied on. This can return information such as whether a function was invoked, how many times it was invoked, and what argument it was invoked with. A spy on a function is created using the syntax `const spy = vi.spyOn(object, 'methodName');`
 
 _Note:_ The function being spied on actually executes.
 
 In our example, we have an external dependency on console.log(). Let us add a spy and test for it.
 
  ```ts
+  import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
   import Calculator from "./calculator";
 
   describe("services > math", () => {
@@ -416,7 +421,7 @@ In our example, we have an external dependency on console.log(). Let us add a sp
         });
 
         it("should invoke console.log() with the result 2 for inputs 1 and 1", () => {
-          const logSpy = jest.spyOn(console, "log");
+          const logSpy = vi.spyOn(console, "log");
 
           const result: number = calculator.add(1, 1);
 
@@ -431,7 +436,7 @@ In our example, we have an external dependency on console.log(). Let us add a sp
 
 ### Mock
 
-A mock is function which replaces an existing function. In our example, if we wanted to change the behavior of console.log() for our tests, we can do so using a mock. A mock implementation can be substituted for a spy or a jest.fn(). The syntax is as below:
+A mock is a function which replaces an existing function. In our example, if we wanted to change the behavior of console.log() for our tests, we can do so using a mock. A mock implementation can be substituted for a spy or a vi.fn(). The syntax is as below:
 
  ```ts
   spy.mockImplementation(() => {
@@ -444,7 +449,7 @@ In our example, if we wanted to replace the behavior of console.log(), we can do
 
 ```ts
   it("should invoke console.log() with the result 2 for inputs 1 and 1", () => {
-    const logSpy = jest.spyOn(console, "log");
+    const logSpy = vi.spyOn(console, "log");
     logSpy.mockImplementation(() => {
       // This will no longer print to console.
     });
@@ -478,7 +483,7 @@ Using a stub in our example simply prevents console.log() from being executed, s
 
   ```ts
   it("should invoke console.log() with the result 2 for inputs 1 and 1", () => {
-    const logSpy = jest.spyOn(console, "log");
+    const logSpy = vi.spyOn(console, "log");
     logSpy.mockReturnValue();
 
     const result: number = calculator.add(1, 1);
@@ -510,10 +515,11 @@ We can test the above code as follows:
 
  ```ts
   // Assuming we have done the setup as in previous tests
+  import { describe, it, expect, vi } from 'vitest';
 
   describe("getData()", () => {
     it('should invoke axios.get() with "myUrl"', async () => {
-      const getStub = jest
+      const getStub = vi
         .spyOn(axios, "get")
         .mockResolvedValue({ status: 200, data: {} });
 
@@ -523,7 +529,7 @@ We can test the above code as follows:
     });
 
     it("should return the status as 200", async () => {
-      const getStub = jest
+      const getStub = vi
         .spyOn(axios, "get")
         .mockResolvedValue({ status: 200, data: {} });
 
@@ -562,7 +568,7 @@ We can test the above functionality as follows:
  ```ts
   describe("getDataAndSetStore()", () => {
     it('should invoke axios.get() with "myUrl"', async () => {
-      const getStub = jest
+      const getStub = vi
         .spyOn(axios, "get")
         .mockResolvedValue({ status: 200, data: {} });
 
@@ -572,26 +578,26 @@ We can test the above functionality as follows:
     });
 
     it("should set the data in store", async () => {
-      const addDataStub = jest.spyOn(Store, "setData").mockImplementation();
-      const getStub = jest
+      const addDataStub = vi.spyOn(Store, "setData").mockImplementation();
+      const getStub = vi
         .spyOn(axios, "get")
         .mockResolvedValue({ status: 200, data: "myData" });
-      jest.useFakeTimers();
+      vi.useFakeTimers();
 
       httpService.getDataAndSetStore();
-      jest.runAllTimers();
+      vi.runAllTimers();
       await Promise.resolve();
 
       expect(addDataStub).toHaveBeenCalledWith("myData");
 
       addDataStub.mockRestore();
       getStub.mockRestore();
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
   });
   ```
 
-You can read more about jest timers [here](https://jestjs.io/docs/timer-mocks).
+You can read more about Vitest timers [here](https://vitest.dev/api/vi.html#vi-usefaketimers).
 
 ### Callbacks
 
@@ -605,7 +611,7 @@ test('Check if I am a true husky', () => {
   fetchData(callback);
 });
 ```
-Here, fetchData() is a function that takes a callback and would call that callback function later in it's implementation. Now consider 2 scenarios:
+Here, fetchData() is a function that takes a callback and would call that callback function later in its implementation. Now consider 2 scenarios:
 
 case 1: 
 ```ts
@@ -650,105 +656,197 @@ it('renders the Counter component correctly', async () => {
   render(<Counter />);
 
   // Will throw error if not found
-  screen.getByText("Count: 0" )
-  screen.getByText("Click me!" )
+  screen.getByText("Count: 0")
+  screen.getByText("Click me!")
 })
 ```
-Above is a very simple test to ensure that our Counter component renders as expected with out any user input. Suppose now that we wanted to test user interaction with the page:
+Above is a very simple test to ensure that our Counter component renders as expected without any user input. Suppose now that we wanted to test user interaction with the page:
 
 ```ts
 import {render, fireEvent, screen} from '@testing-library/react'
 import Counter from './Counter'
 it('correctly renders the updated count after the user clicks the button', async () => {
   render(<Counter />);
-  screen.getByText("Count: 0" )
+  screen.getByText("Count: 0")
   fireEvent.click(screen.getByRole('button'))
-  screen.getByText("Count: 1" )
+  screen.getByText("Count: 1")
 })
 ```
 
 A full list of testing functions from React Testing Library can be found [here](https://testing-library.com/docs/dom-testing-library/cheatsheet/).
-# Setting up testing using Jest in VSCode
+# Setting up testing using Vitest in VSCode
 
-> For a monorepo project that has multiple root folders (for example, our final project), the Jest extension might need additional configuration to work. An alternative is [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner), which functions similar to the Jest extension and works out of the box.
+Testing can sometimes get cumbersome as the user is expected to remember all the options provided by Vitest to run a specific set of tests, or otherwise the user will have to run the entire test suite just to verify the result of a single test case. Not anymore!
 
-Testing can sometimes get cumbersome as the user is expected to remember all the options provided by Jest to run a specific set of tests, or otherwise the user will have to run the entire test suite just to verify the result of a single test case. Not anymore!
-
-With [vscode-jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest), you have complete control over the way you want to run tests, with many features that visually inform the users about which specific line is failing with what error.
-
-![Running tests on demand](https://user-images.githubusercontent.com/891093/136676501-45ea5fa2-0bc5-496e-9c70-971700d954e8.png)
+With the official [Vitest extension](https://marketplace.visualstudio.com/items?itemName=vitest.explorer), you have complete control over the way you want to run tests, with many features that visually inform the users about which specific line is failing with what error.
 
 ## Features
 
-- Starts Jest automatically when you're in a root folder project with Jest installed.
-- Show individual fail / passes inline.
-- Show fails inside the problem inspector.
-- Highlights the errors next to the `expect` functions.
-- Adds syntax highlighting to snapshot files.
-- A one button update for failed snapshots.
-- Show coverage information in files being tested.
-- Help debug jest tests in vscode.
-- Supports multiple test run modes (automated, manual, and hybrid onSave) to meet user's preferred development experience.
-- Track and shows overall workspace/project test stats.
+- **Run, debug, and watch tests** directly in Visual Studio Code
+- **Inline test results** - Show individual pass/fail status next to each test
+- **Error highlighting** - Highlights errors next to the `expect` functions
+- **Inline console.log display** - Console logs appear inline in the editor next to the code that produced them
+- **Coverage support** - Run tests with code coverage (requires VS Code >= 1.88)
+- **Continuous run mode** - Watch mode for running tests on file changes
+- **Test filtering** - Use `@open` tag to only show tests open in the editor
+
+## Requirements
+
+- Visual Studio Code version >= 1.77.0
+- Vitest version >= v1.4.0
+- Node.js version >= 18.0.0
 
 ## Installation
 
 ### Direct Installation
 
-1. Open Visual Studio Code, go to the extension tab.
-2. Search for "Jest" with the publisher name as "Orta".
+1. Open Visual Studio Code and go to the Extensions tab (`Cmd+Shift+X` on macOS, `Ctrl+Shift+X` on Windows/Linux).
+2. Search for "Vitest" (publisher: "Vitest").
 3. Click "Install".
 
 ### From Visual Studio Marketplace
 
-1. Visit [Jest - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) and click "Install".
-2. Allow the browser to open VSCode as shown (might be different for macOS/Linux systems) by clicking on Continue.
+1. Visit [Vitest - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) and click "Install".
+2. Allow the browser to open VSCode.
+3. Once VSCode is open, click "Install".
 
-   ![Allow browser to open VSCode](./assets/week1-unit-testing/vscode-jest/allow-browser-vscode.jpg)
-3. Once VSCode is open, click on "Install".
+Once installed, the extension should work out of the box without any extra configuration for most projects with Vitest configured.
 
-Once installed, the extension should work out of the box without any extra configuration for most of the homework handouts and project starter code.
+## Verifying Installation
 
-You can verify the installation by checking if the following is visible to you when you open a project which has Jest configured (VSCode restart maybe required.).
+After installation (VSCode restart may be required):
 
-![Verify Installation](./assets/week1-unit-testing/vscode-jest/verify-installation.jpg)
+1. Open the **Testing** view by clicking the flask/beaker icon in the Activity Bar (left sidebar), or open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **"Testing: Focus on Test Explorer View"**.
+2. You should see your test files and test suites listed in the Test Explorer.
+3. Green checkmarks indicate passing tests, red X marks indicate failures.
 
-If restarting Jest does not work, you can run the following in your VSCode by opening VSCode's command palette (`Ctrl + Shift + P` in Windows, `Cmd + Shift + P` in macOS) and run the following - "_Jest: Start All Runners_".
+If tests don't appear, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **"Vitest: Start All Runners"**.
 
-![Manually start Jest Runner](./assets/week1-unit-testing/vscode-jest/manual-jest-runner-start.jpg)
+## Project Configuration
 
+For the extension to work, your project needs Vitest configured. Create a `vitest.config.ts` file in your project root:
 
-### Additional Extensions and Libraries
+```ts
+import { defineConfig } from 'vitest/config';
 
-You can explore [jest extended library](https://www.npmjs.com/package/jest-extended) that offers additional matchers for testing. 
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  }
+});
+```
 
-## Configuration
+Add test scripts in your `package.json`:
 
-As of the latest stable version, the extension is set to run all tests whenever any change is made to the files containing the tests. You can modify the behaviour to manual execution where you can run specific test cases as and when required. This can be modified by changing the `"jest.autoRun"` setting as follows -
+```json
+{
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage"
+  }
+}
+```
 
-- `"jest.autoRun": {"watch": true}` => will start the jest with the watch flag and leave all tests at "unknown" state until changes are detected.
-- `"jest.autoRun": {"watch": true, "onStartup": ["all-tests"]}` => will start running all tests upon project launch to update overall project test stats, followed by the jest watch for changes.
-- `"jest.autoRun": "off"` => there will be no automatic test run, users will trigger test run by either command or context-menu.
-- `"jest.autoRun": {"watch": false, "onSave": "test-file"}` => the extension will trigger test run for the given test file upon save.
-- `"jest.autoRun": {"watch": false, "onSave": "test-src-file"}` => the extension will trigger test run for the given test or source file upon save.
+## Using the Extension
 
-An example of changing the extension to run in manual mode is demonstrated below -
+### Running Tests from the Testing View
 
-![Enable Manual Mode](./assets/week1-unit-testing/vscode-jest/disable-auto-run.gif)
+The Testing view in the sidebar provides a tree view of all your tests:
 
-> NOTE - You will only be able to `Run` specific test cases as and when required only when `autoRun` is `off`. However, you'll be able to `Debug` any test cases in all available modes.
+- **Run All Tests**: Click the play button at the top to run all tests
+- **Run Single Test/Suite**: Hover over a test or suite and click the play button
+- **Run Tests with Coverage**: Click the coverage icon to run tests with code coverage
+- **Continuous Run**: Click the "eye" icon to enable watch mode - tests will rerun when files change
 
- 
+### Running Tests from Test Files
+
+When viewing a test file, you'll see icons in the gutter (left margin) next to each test:
+
+- **Click the icon** to run that specific test
+- **Right-click the icon** for more options:
+  - `Run Test` - Execute the test
+  - `Debug Test` - Start a debugging session
+  - `Run with Coverage` - Run with code coverage
+  - `Reveal in Test Explorer` - Find the test in the Testing view
+
+### Keyboard Shortcuts
+
+VS Code provides testing commands you can access via the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`):
+
+- **Test: Run All Tests** - Run all tests in the workspace
+- **Test: Run Test at Cursor** - Run the test at the current cursor position
+- **Test: Rerun Last Run** - Re-run the last executed tests
+- **Test: Debug Test at Cursor** - Debug the test at the current cursor position
+
+You can also view and customize keyboard shortcuts for these commands by opening the Keyboard Shortcuts editor (`Cmd+K Cmd+S` / `Ctrl+K Ctrl+S`) and searching for "test".
+
 ## Debugging Tests
-Once the extension is setup and confirmed to be working, we can now begin debugging the tests. You can do so by opening the testing tab from the left sidebar in VSCode to view all the tests present in the current project.
 
-You can also navigate to the specific test file manually, and you will notice some icons/action buttons in the editor next to each test. Right clicking on the icons will bring up a test-specific context menu which will have options to debug the specific test. Be sure to place breakpoints in the specific pieces of code by clicking to the left of the line numbers.
+The Vitest extension makes debugging tests straightforward:
 
-![Debug Test](./assets/week1-unit-testing/vscode-jest/start-debug-test.jpg)
+1. **Set Breakpoints**: Click in the gutter (left of line numbers) to set breakpoints in your test or source code.
 
-If everything is setup correctly, the debugger in VSCode will pause at the breakpoint you set and you can check the values of the variables by hovering over the said variable. 
+2. **Start Debugging**: 
+   - Right-click on the test icon in the gutter and select "Debug Test"
+   - Or hover over a test in the Testing view and click the debug icon (bug icon)
 
-![Debugging in Action](./assets/week1-unit-testing/vscode-jest/debugging-tests.jpg)
+3. **Use the Debugger**: When the debugger pauses at a breakpoint:
+   - Hover over variables to see their values
+   - Use the Debug Console to evaluate expressions
+   - Step through code using the debug toolbar (Step Over, Step Into, Step Out)
+
+4. **Debug Configuration**: The extension automatically configures debugging. If you need custom settings, you can modify these in your VS Code settings:
+   - `vitest.debuggerPort` - Port for the debugger (default: 9229)
+   - `vitest.debugExclude` - Glob patterns to exclude from debugging
+
+## Extension Settings
+
+You can customize the extension behavior in VS Code settings (`Cmd+,` / `Ctrl+,`):
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `vitest.rootConfig` | Path to your Vitest config file | Auto-detected |
+| `vitest.nodeExecutable` | Path to Node.js executable | Auto-detected |
+| `vitest.showImportsDuration` | Show module import times | `true` |
+| `vitest.applyDiagnostic` | Show error squiggly lines | `true` |
+
+### For Monorepo Projects
+
+If you're working with a monorepo, configure a [Vitest workspace](https://vitest.dev/guide/workspace):
+
+1. Create a `vitest.workspace.ts` file at the root:
+
+```ts
+import { defineWorkspace } from 'vitest/config';
+
+export default defineWorkspace([
+  'packages/*/vitest.config.ts',
+]);
+```
+
+2. Set the workspace config in VS Code settings:
+```json
+{
+  "vitest.workspaceConfig": "./vitest.workspace.ts"
+}
+```
+
+## Troubleshooting
+
+**Tests not appearing in Test Explorer:**
+- Ensure Vitest is installed (`npm install -D vitest`)
+- Check that your config file is named correctly (`vitest.config.ts` or `vite.config.ts`)
+- Run "Vitest: Start All Runners" from the Command Palette
+
+**Extension not finding Vitest:**
+- Set `vitest.vitestPackagePath` to the path of Vitest's `package.json` in your `node_modules`
+
+**Debugging not working:**
+- Ensure source maps are enabled in your config
+- Check that the `vitest.debuggerPort` is not in use
 
 
 
@@ -778,7 +876,7 @@ If everything is setup correctly, the debugger in VSCode will pause at the break
 1. Write tests based on the expected behavior, not based on the interpretation/implementation of it.
 2. Test assertion (expect) should match the test description.
 3. Each spec should test only 1 thing (preferably with 1 assertion per test).
-4. Organize tests using suites (i.e. each method has it's own suite).
+4. Organize tests using suites (i.e. each method has its own suite).
 5. Use setup and teardown functions to reduce code duplicity.
 6. Code duplicity in tests is preferred over complicated logic to reduce it.
    - If your tests need tests, they have no value.
@@ -790,84 +888,3 @@ If everything is setup correctly, the debugger in VSCode will pause at the break
 9. If large test data is being used, ensure clean-up after tests to prevent memory leaks.
 10. Code coverage is a deceptive measure. 100% coverage does not mean 100% tested code.
 11. A well designed test suite improves the quality and reliability of code.
-
-# Appendix: Using Vitest as an Alternative to Jest
-
-While this tutorial focuses on Jest, you might prefer using Vitest, a modern testing framework that is fast, lightweight, and integrates seamlessly with Vite. Vitest offers a Jest-like API, so the transition is easy if you already know Jest.
-
-## Why Vitest?
-- Faster test execution (built on Vite and esbuild)
-- Jest compatible syntax (describe, it, expect)
-- Built-in mocking and snapshot testing
-- Optional UI for visual test running (vitest --ui)
-
-### Installation
-Install Vitest as a development dependency:
-```bash
-npm install --save-dev vitest
-```
-
-For coverage support:
-```bash
-npm install --save-dev @vitest/coverage-v8
-```
-
-Also, if you're using Vitest, grab the VSCode extension - makes testing way smoother and lets you run/debug tests right from the editor with inline results. Super convenient for TDD! Just search "Vitest" in extensions.
-
-### Setup
-Add a test script in your package.json:
-```json
-{
-  "scripts": {
-    "test": "vitest"
-  }
-}
-```
-
-If using Vite, configure the test environment in vitest.config.ts:
-```ts
-import { defineConfig } from 'vitest/config';
-
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'node'
-  }
-})
-```
-
-### Writing Tests
-Vitest uses the same structure as Jest. Create calculator.test.ts:
-```ts
-import { describe, it, expect } from 'vitest';
-import Calculator from './calculator';
-
-describe('Calculator', () => {
-  it('should return 2 when inputs are 1 and 1', () => {
-    const calculator = new Calculator();
-    expect(calculator.add(1, 1).toBe(2));
-  });
-});
-```
-
-### Mocking
-Vitest uses vi instead of jest for mocks and spies:
-```ts
-import { vi } from 'vitest'
-
-it('should call console.log', () => {
-  const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-  const calculator = new Calculator();
-  calculator.add(1, 1);
-  expect(logSpy).toHaveBeenCalled();
-  logSpy.mockRestore();
-});
-```
-
-### Running Tests
-Run tests in different modes:
-```bash
-npm run test          # Run all tests
-npm run test -- --watch  # Watch mode
-npm run test -- --ui      # UI test runner
-```

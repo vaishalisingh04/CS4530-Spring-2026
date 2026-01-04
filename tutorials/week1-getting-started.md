@@ -164,7 +164,8 @@ VSCode comes with a rich set of extensions to aid in software development.
 Below is a list of extensions we strongly recommend.
 
 1. [Prettier](https://marketplace.visualstudio.com/items/?itemName=esbenp.prettier-vscode) - code formatter
-2. [ESLint](https://marketplace.visualstudio.com/items/?itemName=dbaeumer.vscode-eslint)
+2. [ESLint](https://marketplace.visualstudio.com/items/?itemName=dbaeumer.vscode-eslint) - linter for JavaScript/TypeScript
+3. [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) - run, debug, and watch Vitest tests directly in VS Code (see the [Unit Testing tutorial](/tutorials/week1-unit-testing#setting-up-testing-using-vitest-in-vscode) for detailed setup instructions)
 
 To install an extension:
 
