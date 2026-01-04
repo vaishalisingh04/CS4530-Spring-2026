@@ -24,7 +24,7 @@ The objectives of this assignment are to:
 
 If you were registered for the class before Monday, January 5, you should have an email from a TA with an invitation to our organization. Check your spam/junk folder and accept the invitation if you don't have it. If you cannot find the invitation, if you registered for the class late, or have any other issue that keeps you from getting started, please create a Piazza post to contact us and we will try to help.
 
-After that accept our [GitHub Classroom Invitation for this assignment] (XXX TODO) . It will create a Github repository for you which will include the starter code for this assignment.
+After that accept our [GitHub Classroom Invitation for this assignment](https://classroom.github.com/a/VujpmhQc). It will create a Github repository for you which will include the starter code for this assignment.
 
 If you are new to Git, you may want to work on "Learning Basics of Git" [assignment](https://classroom.github.com/a/QkL5qQ90) first!
 
@@ -66,11 +66,11 @@ After that, follow the following steps:
 
 ### 1.2. Understanding "The Server"
 
-The code in the server directory is all TypeScript that is intended to be run on a web server. It’s built on top of [express](https://expressjs.com/), a library used to create programs that accept and respond to HTTP requests. Express can do a lot of things, but we’re only going using it to send and receive chunks of JSON-formatted data (line 18 of `sever/src/app.ts` (XXX TODO check) tells the Express library to behave that way).
+The code in the server directory is all TypeScript that is intended to be run on a web server. It’s built on top of [express](https://expressjs.com/), a library used to create programs that accept and respond to HTTP requests. Express can do a lot of things, but we’re only going using it to send and receive chunks of JSON-formatted data (line 19 of `server/src/app.ts` tells the Express library to behave that way).
 
 #### HTTP GET Requests
 
-Your web browser makes one kind of HTTP request, a GET request, whenever you type in a URL and hit ENTER. If you go to <http://localhost:8000/api/thread/list> while the server is running, you will see a bunch of JSON-formatted data. Line 36 of `server/src/app.ts` (XXX TODO check) causes the request to that URL to be sent to the `getList` controller, which is just a function that is defined in `server/src/controllers/thread.controller.ts`.
+Your web browser makes one kind of HTTP request, a GET request, whenever you type in a URL and hit ENTER. If you go to <http://localhost:8000/api/thread/list> while the server is running, you will see a bunch of JSON-formatted data. Line 37 of `server/src/app.ts` causes the request to that URL to be sent to the `getList` controller, which is just a function that is defined in `server/src/controllers/thread.controller.ts`.
 
 HTTP GET requests are supposed to just look up information. It is considered bad behavior if a HTTP GET requests changes something about the world. In the context of GameNite, a HTTP GET request shouldn’t add a new comment, or create a new post, or initialize a new game.
 
@@ -93,9 +93,7 @@ curl --location 'localhost:8000/api/thread/create' \
 }'
 ```
 
-(XXX TODO check this ^)
-
-Line 35 of `server/src/app.ts` (XXX TODO check) causes this request to be sent to the `postCreate` controller, which is also just a function defined in `server/src/controllers/thread.controller.ts`.
+Line 36 of `server/src/app.ts` causes this request to be sent to the `postCreate` controller, which is also just a function defined in `server/src/controllers/thread.controller.ts`.
 
 You may find that it’s easier to make HTTP POST requests from a tool like Postman: see our Postman tutorial (XXX TODO link) for details. If you click the `</>` icon while developing a request, you can pick “cURL” from the dropdown menu and get a command-line snippet that performs the same request.
 
@@ -137,9 +135,9 @@ You can test the server by going to the `server` directory and running `npm run 
 ## 2. Recommendations when working on the project
 
 1. Open the client application in a browser and interact with it. While interacting, monitor the application tab in the browser’s developer tools. The application tab will give you information about the HTTP requests the client sends to the server. The HTTP requests will contain URIs in their headers. You can use this information to understand the endpoints in the server.
-3. Make sure VS Code is set up as described in the development environment tutorial, with ESLint, Typescript, and Prettier installed.
-4. Do not wait until the last minute to run npm run lint and npm run build to check for linter and typescript errors!
-5. Follow the debugging policy to help in the debugging process.
+2. Make sure VS Code is set up as described in the development environment tutorial, with ESLint, Typescript, and Prettier installed. Our ESLint setup encodes very specific style rules, and if you do not have VSCode lint feedback enabled you will have to deal with an avalance of errors when you first lint your code.
+3. Do not wait until the last minute to run npm run lint and npm run build to check for linter and typescript errors!
+4. Follow the debugging policy to help in the debugging process.
 
 ## 3. Handing in the project
 
@@ -162,11 +160,11 @@ ip1-me $> npm run lint –workspaces
 ip1-me $> npm run test –workspaces
 ```
 
-When you push your code to GitHub, you can see the status icon for your most recent submission:
+When you push your code to GitHub, you can see the status icon for your most recent submission. It's initally a yellow circle, like this:
 
 ![image]({{site.baseurl}}{% link /Assignments/ip1/github-ci.png %})
 
-After the tests run, this will turn into a red ❌ or a green ✅, and clicking on the icon will let you see details of the tests we ran.
+After the tests run, this will turn into a red ❌ or a green ✅. Clicking on the icon will let you see details of the tests we ran.
 
 The Actions tab on GitHub has the results of previous runs.
 
@@ -198,13 +196,13 @@ There are several problems with the User service for GameNite. In the remainder 
 
 The first and most glaring is that some of the functions, despite claiming to return `SafeUserInfo` objects, actually return passwords, which are then passed on to the controller and returned. REST API calls should never expose passwords in their responses like this!
 
- 1. Investigate the five User REST API endpoints listed in the README, the User controller in `server/src/controllers/user.controller.ts`, and the User service in `server/src/services/user.service.ts`, to find some or all of the errors. In the written part of your submission, include a cURL command that result in the User API returning passwords.
+ 1. Investigate the five User REST API endpoints listed in the README, the User controller in `server/src/controllers/user.controller.ts`, and the User service in `server/src/services/user.service.ts`, to find at least one way of exposing passwords through the API. In the written part of your submission, include a cURL command that result in the User API returning passwords.
 
  2. It’s quite embarrassing that these bugs exist despite the user service having 100% test coverage! Here's your chance to do test-driven development. **First**, modify the tests so that they actually fail (as they should!) on the current implementation. The User record’s random id and the username should never be exposed through REST API endpoints, and the tests should account for this requirement. **Second**, modify the user service so that it passes the new tests.
 
  3. In the written part of your submission, briefly explain why TypeScript allowed a SafeUserInfo-returning service function to include a password field despite SafeUserInfo having no password field.
 
- 4. **Challenge**: there's another security error in the user service that's a little more difficult to find. Identify the bug and include a cURL command that exercises it, explain why the cURL command demonstrates something bad happening, create a failing test, and fix the bug. (This is just worth 5% of the overall score for this assignment. Don't get stuck here and neglect the other tasks!)
+ 4. **Challenge**: there's another security bug in the user service that's a little more difficult to find. Identify the bug and include a cURL command that demonstrates it, explain why the cURL command demonstrates something bad happening, create a failing test, and fix the bug. (This is just worth 5% of the overall score for this assignment. Don't get stuck here and neglect the other tasks!)
 
 ### Task 4: Creating an Auth model
 
