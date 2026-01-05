@@ -45,7 +45,7 @@ We will evaluate each individual's contribution on the basis of a variety of fac
 We will make regular efforts to collect and distribute this feedback throughout the project — our ultimate goal is for all students to participate and receive full marks.
 
 ### Team Formation
-All projects will be completed in a team of 4 students. All students in each team MUST be in the same section of the class.
+All projects will be completed in a team of 4 students. All students in each team MUST be in the **same section** of the class.
 The very first deliverable for the project will be a self assessment and team preference survey: you will be able to indicate
 your preferences for teammates. The instructors will assign students to the teams based on a number of factors including your responses to the survey and diversity of skills for the teammates.
 
@@ -55,7 +55,7 @@ Each team will be assigned a TA to act as a mentor, who will work closely with y
 
 During Week 5, you will arrange a "Kickoff Meeting" with your TA mentor, where you will meet your TA mentor and have the opportunity to share any early ideas that you might want feedback on before submitting the your preliminary project plan.
 
-Once project begins in full force, you will have weekly meetings with your TA mentor (scheduled at your team's and the TA's convenience) in order to help ensure that you are making progress on the project, and to help address problems that you encounter (be they technical or non-technical problems). Weekly meetings will often include review of your pull requests, github commits,  code reviews and demos from each group.
+Once project begins in full force, you will have weekly meetings with your TA mentor (scheduled at your team's and the TA's convenience) in order to help ensure that you are making progress on the project, and to help address problems that you encounter (be they technical or non-technical problems). Weekly meetings will often include review of your pull requests, github commits, code reviews and demos from each group.
 
 
 ###  Preliminary Project Plan

@@ -29,11 +29,11 @@ Remember: The basic policy is that you are **responsible for the code you submit
 
 ### Late Policy
 Your work is late if it is not turned in by the deadline. 
-For individual submissions (i.e., Individual Projects):
+For individual Projects and Activities:
 * 10% will be deducted for late work turned in within 24 hours after the due date.
 * Work submitted more than 24 hours late will receive a zero.
 
-For group submissions (i.e., Final Project and Group Activities):
+For group submissions (i.e., Final Project Deliverbles):
 * No late submission is allowed.
 
 If you're worried about being busy around the time of a HW submission, please plan ahead and get started early. **Homework that does not compile or does not run will receive at most 50% credit**.  
@@ -58,7 +58,7 @@ If you steal someone else's work, you fail the class. You are responsible for pr
 
 **To ensure that students have completed the work themselves (and have gained necessary understanding), instructors might require students to explain the work they have submitted. We will consider adjusting grades based on your understanding of the course material.**
 
-Be sure to review our policy on use of AI.
+Be sure to review our [policy on use of AI]({{ site.baseurl }}{% link ai.md %}).
 
 If you are concerned that by reusing and attributing that copied code it may appear that you didn’t complete the assignment yourself, then please raise a discussion with the instructor. If you are in doubt whether using others’ work is allowed, you should assume that it is NOT allowed unless the instructors confirm otherwise.
 
@@ -72,7 +72,7 @@ BE PRESENT WHEN YOU ARE ATTENDING CLASS. Please do not distract yourself from th
 ## Accommodations for Disabilities
 Students who have disabilities who wish to receive academic services and/or accommodations should visit the [Disability Access Services](https://disabilityaccessservices.sites.northeastern.edu/) at 20 Dodge Hall or call (617) 373-2675 (previously known as DRC)
 Please be sure to provide your instructor with DAS's accommodations letter early in the semester in order to avoid logistical challenges.
-This course includes a significant group work including project, and providing extensions for group work can be complex. DAS accomodations often do not apply to group submissions but we encourage you to work with your instructors to see how course staff can provide the support you might need. 
+This course includes a significant group work including project, and providing extensions for group work can be complex. DAS accomodations often do not apply to **group submissions** but we encourage you to work with your instructors to see how course staff can provide the support you might need. 
 As-per the DAS's policy, it is the **student's responsibility** to coordinate with the instructor in order to request suitable accommodations.
 
 ## Title IX Notice

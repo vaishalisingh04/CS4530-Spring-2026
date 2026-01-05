@@ -14,7 +14,7 @@ All TA office hours will be held virtually. We will explore the options of holdi
 
 TA Office Hours are hosted on Microsoft Teams, using the [Khoury Office Hours app](https://officehours.khoury.northeastern.edu/). Please see the user guide for information on how to log in and ask questions.
 
-**We usually do not hold office hours during school holidays (Indigenous Peoples' Day, Veteran's Day and Thanksgiving Break)**
+**We usually do not hold office hours during school holidays (Spring Break, MLK Day, President's Day, Indigenous Peoples' Day, Veteran's Day and Thanksgiving Break)**
 
 ## Schedule
 {% include officeHours.html %}
