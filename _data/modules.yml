@@ -2,11 +2,17 @@
 # Each top-level key is an item that is referneced by any section schedule's "content" array
 # Each key has a "name" attribute (rendered on the calendar), a "page" attribute (which contains a link to the lesson) and an optional "type" attribute, which is a key into the _data/config.yml "types" dictionary.
 mod1:
-  name: Orientation & User Stories
-  page: /modules/1-user-stories
-mod2:
-  name: Typescript & Test Driven Development
+  name: Orientation & Requirements
   page: 
+mod2a:
+  name: Requirements Analysis
+  page: /modules/2-requirements-to-tests
+mod2b:
+  name: Test-Driven Development
+  page: /modules/2-requirements-to-tests
+mod2:
+  name: From Requirements to Tests
+  page: /modules/2-requirements-to-tests
 mod3:
   name: Test Adequacy
   page: 
