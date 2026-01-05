@@ -29,6 +29,7 @@ Contents:
     - [Stub](#stub)
   - [Testing Asynchronous Code](#testing-asynchronous-code)
     - [Promise](#promise)
+    - [Testing Promise Rejections](#testing-promise-rejections)
     - [Callbacks](#callbacks)
   - [UI Testing](#ui-testing)
 - [Setting up testing using Vitest in VSCode](#setting-up-testing-using-vitest-in-vscode)
@@ -230,6 +231,9 @@ All three matchers are used to test equality, though they have slight but import
   });
   ```
 ## AAA
+
+The AAA pattern stands for **Assemble-Act-Assert**. You may also see this referred to as **Assemble-Act-Assess** in some materials (including lecture slides), as one typically assesses code behavior using assert statements. Both terms are used interchangeably in practice.
+
 ### Assemble
 
 In order to run a test, we need to first assemble it. This may include creating instances of classes/variables, setting up test data for inputs, setting up spies/stubs/mocks (which will be covered in subsequent sections), or setting up the expected output. In simple cases, one may not need to assemble the test. This phase is very similar to the setup phase.
@@ -539,6 +543,63 @@ We can test the above code as follows:
 
       getStub.mockRestore();
     });
+  });
+  ```
+
+#### Testing Promise Rejections
+
+When testing async functions that are expected to throw errors or reject promises, you need to use `await expect(...).rejects.toThrowError()`. This is a common source of bugs in tests — if you forget to use the correct pattern, your test may pass even when the code doesn't behave as expected.
+
+Consider a function that validates user authentication:
+
+```ts
+  export async function enforceAuth(credentials: { username: string; password: string }): Promise<{ _id: string; username: string }> {
+    const user = await validateCredentials(credentials);
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
+    return { _id: user.id, username: credentials.username };
+  }
+  ```
+
+We can test both successful authentication and failed authentication as follows:
+
+```ts
+  import { describe, it, expect } from 'vitest';
+  import { enforceAuth } from '../../src/services/auth.service';
+
+  describe('enforceAuth', () => {
+    it('should return a user and id on good auth', async () => {
+      const user = await enforceAuth({ username: 'user1', password: 'pwd1111' });
+      expect(user).toStrictEqual({ _id: expect.any(String), username: 'user1' });
+    });
+
+    it('should raise on bad auth', async () => {
+      await expect(enforceAuth({ username: 'user1', password: 'no' })).rejects.toThrowError();
+    });
+  });
+  ```
+
+**Important:** Notice the pattern for testing rejections:
+- The test function must be `async`
+- You must `await` the `expect()` call
+- Use `.rejects.toThrowError()` to assert that the promise rejects with an error
+
+A common mistake is writing the test like this (which won't work correctly):
+
+```ts
+  // ❌ INCORRECT - This test will pass even if the function doesn't throw!
+  it('should raise on bad auth', () => {
+    expect(() => enforceAuth({ username: 'user1', password: 'no' })).toThrow();
+  });
+  ```
+
+The correct pattern ensures the test properly waits for the async rejection:
+
+```ts
+  // ✅ CORRECT - Properly tests async rejection
+  it('should raise on bad auth', async () => {
+    await expect(enforceAuth({ username: 'user1', password: 'no' })).rejects.toThrowError();
   });
   ```
 
