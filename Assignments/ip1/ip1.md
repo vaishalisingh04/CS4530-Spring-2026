@@ -20,6 +20,10 @@ The objectives of this assignment are to:
 - Learn how to write unit tests with Vitest
 - Translate high-level requirements into code
 
+## Changelog
+
+ - 2026-01-07: Clarified that all changes should be made to the `main` branch.
+
 ## 1. Getting Started
 
 If you were registered for the class before Wednesday, January 7, you should have an email from a TA with an invitation to our organization. Be sure to check your spam/junk folder. The first step is to accept the invitation. If you cannot find the invitation, if you registered for the class late, or have any other issue that keeps you from getting started, please create a Piazza post to contact us and we will try to help.
@@ -142,7 +146,7 @@ You can test the server by going to the `server` directory and running `npm run 
 
 ## 3. Project Submission
 
-You will submit your code by pushing the final version into your repository (add/commit/push). Be sure to check if the correct version is submitted before the deadline.
+You will submit your code by pushing the final version into your repository (add/commit/push). In this assignment, you should only be making, committing, and pushing changes to the `main` branch of your repository. Be sure to check if the correct version is submitted before the deadline.
 
 On Gradescope, you will submit a plain `.txt` file containing two things:
 
