@@ -938,6 +938,89 @@ interface IMyInterface<T> {
 }
 ``` 
     
+## Modules
+
+Each TypeScript file in our project is a separate [JavaScript module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). By default nothing defined in one module can be used in another module.
+
+*   **export** makes the variables and functions from a module visible outside it.
+*   **import** allows us to use variables and functions exported by another module.
+
+There are two ways of exporting from a JavaScript or TypeScript module: adding `export` before the functions declaration (like `add` and `someVar` in the example below), and writing a separate `export` statemen (like `subtract` in the example below:
+
+```ts
+// file1.ts
+
+export interface Message {
+  msg: string
+}
+
+export function add(x: number, y: number): number {
+  return x + y;
+}
+
+function subtract(x: number, y: number): number {
+  return x - y;
+}
+
+export const someVar: Message = { msg: 'Variables can be exported too.' };
+
+function multiply(): void {
+  throw new Error();
+}
+
+export { subtract };
+```
+
+Import statements allow exported parts of one module to be used in another module. Imported TypeScript types need to be prefixed with `type`.
+
+```ts
+// file2.ts
+import { add, someVar, subtract, type Message } from './file1.ts';
+
+add(1, 2);
+subtract(2, 1);
+console.log(someVar);
+const myMessage: Message = { msg: 'Hello' };
+console.log(myMessage);
+```
+
+### Default Imports
+
+A module can have at most one **default** export. The default export is marked with the `default` keyword after `export`. 
+
+```ts
+// file3.ts
+export default function addOne(x: number): number {
+  return x + 1;
+}
+
+export function addTwo(x: number): number {
+  return x + 2;
+}
+```
+
+A default export is imported without the curly braces:
+
+```ts
+// file4.ts
+import addOne from './file3.ts';
+import { addTwo } from './file3.ts';
+
+addOne(41);
+addTwo(65);
+```
+
+It's possible to combine default and non-default imports into a single line:
+
+```ts
+// file4.ts
+import addOne, { addTwo } from './file3.ts';
+
+addOne(41);
+addTwo(65);
+```
+
+In React projects, the single React component exported from a file is usually a default export.
 
 ## Object oriented programming concepts using TypeScript  
 
@@ -1091,42 +1174,14 @@ get Balance(): number {
 *   Use a prettifier. (If the linter doesn't do it already)
 *   Use general coding guidelines as discussed in Week1.
 
-## tsconfig 
-What is the tsconfig.json file?
-* The presence of a tsconfig.json file in a directory indicates that the directory is the root of a TypeScript project. The tsconfig.json file specifies the root files and the compiler options required to compile the project.
-* JavaScript projects can use a jsconfig.json file instead, which acts almost the same but has some JavaScript-related compiler flags enabled by default.
-* Note: In many packages, a configuration file is included, featuring predefined settings that typically require no alterations. Also, you may not need this for simple projects like hello world.
-A project is compiled in one of the following ways:
-  * By invoking tsc with no input files, in which case the compiler searches for the tsconfig.json file starting in the current directory and continuing up the parent directory chain.
-  * By invoking tsc with no input files and a --project (or just -p) command line option that specifies the path of a directory containing a tsconfig.json file, or a path to a valid .json file containing the configurations.
-When input files are specified on the command line, tsconfig.json files are ignored.
+## The `tsconfig.json` file
 
-Example tsconfig.json files:
-Using the files property
+The presence of a `tsconfig.json` file in a directory indicates that the directory is the root of a TypeScript project, and sets various options for TypeScript. 
 
-```
-{
-  "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true
-  },
-  "files": [
-    "core.ts",
-    "sys.ts",
-    "types.ts",
-    "scanner.ts",
-    "parser.ts",
-    "utilities.ts",
-    "binder.ts",
-    "checker.ts",
-    "emitter.ts",
-    "program.ts",
-    "commandLineParser.ts",
-    "tsc.ts",
-    "diagnosticInformationMap.generated.ts"
-  ]
-}
-```
+Some of these options control how whether or not TypeScript will report certain kinds of errors. The `noImplicitAny` option, for example, causes TypeScript to complain about certain uses of the `any` type, and the `strict` option sets a lot of other options, including `noImplicitAny`.
+
+Other options control what TypeScript does when it is run. The `noEmit` option, for example, configures TypeScript to work only as a type checker. If this option is disabled, the TypeScript compiler will output compiled JavaScript files that match the TypeScript files.
+
+There are many more options that configure TypeScript to work with different kinds of projects. A web server that runs directly in Node.js needs to be configured differently than a React project using JSX that runs in the web browser, for example.
+
+All of TypeScript's configuration options can be found in [the TSConfig Reference](https://www.typescriptlang.org/tsconfig/), but you should not need to manipulate TypeScript's configuration much in this class.
