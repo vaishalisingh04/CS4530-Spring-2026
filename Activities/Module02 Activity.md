@@ -9,7 +9,7 @@ nav_exclude: true
 This activity is intended to supplement the CS4530 lecture on test-driven development. You will need to have already completed the development environment setup for the class.
 
 ### Steps
-1. Download and unpack the [starter Code](https://github.com/neu-se/transcript-service/archive/refs/tags/s26-module2.zip)
+1. Get the starter code by cloning the [`transcript-service-m02` repository from GitHub](https://github.com/neu-se/transcript-service-m02)
 2. Run `npm install` inside the directory that is created when you unzip the download.
 3. Check that every member of the group can run 
    
@@ -17,7 +17,7 @@ This activity is intended to supplement the CS4530 lecture on test-driven develo
     npx vitest --run src/types.spec.ts
     ```
 
-    and see one failing and one succeeding test.
+    and see one failing and one passing test.
 
 4. Check that every member of the group can run 
 
@@ -27,11 +27,19 @@ This activity is intended to supplement the CS4530 lecture on test-driven develo
 
     and see five passing tests.
 
+4. Check that every member of the group can run
+
+   ```
+   npm run test
+   ```
+
+   to run Vitest on all the test files simultaneously and see six passing tests and one failing test.
+
 5. Check that every member of your group can see the ESLint error in `src/transcript.service.ts`. Discuss how to fix the error.
 
 6. Write down two testable behaviors for the `addGrade` function corresponding to the condition of satisfaction that “the user can add a new grade for an existing student.” These should be written as `it("<testable beahvior>", () => {})` in `src/transcript.service.spec.ts`. 
 
-7. Come up with at least two ways in which the `addGrade` function isn't completely specified by the conditions of satisfaction given in lecture. Document these as comments in `src/transcript.service.spec.ts`.
+7. Come up with at least two ways in which the `addGrade` function isn't completely specified by the conditions of satisfaction given in lecture. Document these as comments in `src/transcript.service.spec.ts`. **These tests will fail, because `addGrade` is not implemented. You are not required to implement or submit `addGrade`.**
 
 8. Add Vitest tests to your testable behaviors in `src/transcript.service.spec.ts`. (There should be at least four new tests for `addGrade` at this point.)
 
