@@ -24,6 +24,7 @@ The objectives of this assignment are to:
 
  - 2026-01-07: Clarified that all changes should be made to the `main` branch.
  - 2026-01-09: Clarification in Task 3, part 2: instead of "modify the tests," say "improve existing tests and/or add new tests."
+ - 2026-01-10: Correction: `AuthRecord` is defined in `server/src/models.ts`, not in `server/src/models/auth.model.ts`.
 
 ## 1. Getting Started
 
@@ -241,7 +242,7 @@ There are two connected issues with the User model:
 1. There’s a frequent use of for-loops to loop through all the usernames to find a record that matches a specific username. 
 2. Storing authentication information like a password alongside user profile information like a display name is not a great design: it can make accidental leaks like the ones we've encountered more likely!
 
-These aren’t totally connected problems, but we can solve them together. The file `server/src/services/user.service.ts` contains an unused `storedAuths` object that you will use to maintain a mapping from valid **usernames** to the user IDs that let you look up profile information (like the display name) for that user. The AuthRecord defined in `server/src/models/auth.model.ts` also contains a password.
+These aren’t totally connected problems, but we can solve them together. The file `server/src/services/user.service.ts` contains an unused `storedAuths` object that you will use to maintain a mapping from valid **usernames** to the user IDs that let you look up profile information (like the display name) for that user. The `AuthRecord` type defined in `server/src/models.ts` also contains a password.
 
 Whenever you create a user, you’ll continue to create a new and random user ID, and add to `storedUsers` an entry that maps from the user ID to the user’s record. You should modify `UserRecord` to no longer contain a password, and ensure that the stored record does not contain a password. Additionally, when you create a user, you’ll add an entry to `storedAuths` that maps the username to the `UserRecord`. By using stored auth, you can find the user record associated with a username in two steps: find the user ID using `storedAuths`, and then find the user’s record with that ID in `storedUsers`.
 
