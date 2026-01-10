@@ -23,6 +23,7 @@ The objectives of this assignment are to:
 ## Changelog
 
  - 2026-01-07: Clarified that all changes should be made to the `main` branch.
+ - 2026-01-09: Clarification in Task 3, part 2: instead of "modify the tests," say "improve existing tests and/or add new tests."
 
 ## 1. Getting Started
 
@@ -225,7 +226,7 @@ The first and most glaring is that some of the functions, despite claiming to re
 
  1. Investigate the five User REST API endpoints listed in the README, the User controller in `server/src/controllers/user.controller.ts`, and the User service in `server/src/services/user.service.ts`, to find at least one way of exposing passwords through the API. In the written part of your submission, include a cURL command that result in the User API returning passwords.
 
- 2. It’s quite embarrassing that these bugs exist despite the user service having 100% test coverage! Here's your chance to do test-driven development. **First**, modify the tests so that they actually fail (as they should!) on the current implementation. The User record’s `userId` (a random id, not the username) and the `password` should never be exposed through REST API endpoints, and the tests should account for this requirement. **Second**, modify the user service so that it passes the new tests.
+ 2. It’s quite embarrassing that these bugs exist despite the user service having 100% test coverage! Here's your chance to do test-driven development. **First**, improve existing tests and/or add new tests so that the test suite actually fails (as it should!) on the current implementation. The User record’s `userId` (a random id, not the username) and the `password` should never be exposed through REST API endpoints, and the tests should account for this requirement. **Second**, modify the user service so that it passes the new tests.
 
  3. In the written part of your submission, briefly explain why TypeScript allowed a SafeUserInfo-returning service function to include a password field despite SafeUserInfo having no password field.
 
