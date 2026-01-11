@@ -25,6 +25,7 @@ The objectives of this assignment are to:
  - 2026-01-07: Clarified that all changes should be made to the `main` branch.
  - 2026-01-09: Clarification in Task 3, part 2: instead of "modify the tests," say "improve existing tests and/or add new tests."
  - 2026-01-10: Correction: `AuthRecord` is defined in `server/src/models.ts`, not in `server/src/models/auth.model.ts`.
+ - 2026-01-11: Changed _application tab_ to _"Network" tab (the precise name may depend on the browser)_ in the Recommendations section.
 
 ## 1. Getting Started
 
@@ -140,7 +141,7 @@ You can test the server by going to the `server` directory and running `npm run 
 
 ## 2. Recommendations When Working on the Project
 
-1. Open the client application in a browser and interact with it. While interacting, monitor the application tab in the browser’s developer tools. The application tab will give you information about the HTTP requests the client sends to the server. The HTTP requests will contain URIs in their headers. You can use this information to understand the endpoints in the server.
+1. Open the client application in a browser and interact with it. While interacting, monitor the "Network" tab (the precise name may depend on the browser) in your browser’s developer tools. This tab will give you information about the HTTP requests the client sends to the server. The HTTP requests will contain URIs in their headers. You can use this information to understand the endpoints in the server.
 2. Make sure VS Code is set up as described in the development environment tutorial, with ESLint, Typescript, and Prettier installed. Our ESLint setup encodes very specific style rules, and if you do not have VSCode lint feedback enabled you will have to deal with an avalanche of errors when you first lint your code.
 3. Do not wait until the last minute to run `npm run lint` and `npm run build` to check for linter and typescript errors!
 4. Follow the [debugging policy]({{ site.baseurl }}{% link debugging.md %}) to help in the debugging process.
